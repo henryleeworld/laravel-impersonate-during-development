@@ -1,4 +1,4 @@
-# Laravel 7 開發期間切換使用者
+# Laravel 8 開發期間切換使用者
 
 引入 supianidz 的 laravel-impersonate 套件來擴增允許在開發期間開發者直接以其他使用者身份登入。
 
@@ -20,11 +20,17 @@ $ php artisan key:generate
 ```sh
 $ php artisan migrate --seed
 ```
+- 執行安裝 Laravel Mix 引用的依賴項目，並執行所有 Mix 任務。
+```sh
+$ npm install && npm run dev
+```
 - 在瀏覽器中輸入已定義的路由 URL 來訪問，例如：http://127.0.0.1:8000。
-- 你可以經由 `/register` 來進行註冊，登入後便可以進行使用者切換。
+- 你可以經由 `/register` 來進行註冊。
+- 完成註冊後，可以經由 `/login` 來進行登入。
+- 完成登入後便可以進行使用者切換。
 
 ----
 
 ## 畫面截圖
-![](https://i.imgur.com/854WXvS.png)
+![](https://i.imgur.com/DS9hoki.png)
 > 使用者便可以快速切換為其他使用者帳戶，而不需要關閉正在執行的程式
