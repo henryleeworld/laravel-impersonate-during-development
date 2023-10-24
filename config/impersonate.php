@@ -1,100 +1,90 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
-    | LaraPersonate
+    | Impersonation Interface
     |--------------------------------------------------------------------------
-    | LaraPersonate is enabled by default, when debug is set to true in app.php.
     | You can override the value by setting enable to true or false instead of null.
     |
     */
-    'enabled'     => env('APP_DEBUG', true),
+    'enabled' => env('IMPERSONATE_ENABLED', true),
 
     /*
     |--------------------------------------------------------------------------
-    | Allowed TLD
+    | Exclude Impersonate
     |--------------------------------------------------------------------------
-    |
-    | This is to prevent mis-usage during production if debug mode is
-    | unintentionally left active. The package will detect the site
-    | URL and if the TLD isn't present in this array, it will not
-    | activate. If your development TLD is different to .dev or
-    | .local, simply add it to the array below.
-    |
-    | Empty the array if you don't want any restrictions on the tlds.
+    | You can provide an array of URI's that must be ignored (eg. 'api/*')
     |
     */
-    'allowed_tld' => ['dev', 'local', 'io'],
+    'except'  => [
+        'telescope*', 'horizon*', 'api/*',
+    ],
 
     /*
     |--------------------------------------------------------------------------
     | User Model
     |--------------------------------------------------------------------------
     |
-    | Path to the application User model. This will be used to retrieve the users
-    | displayed in the select dropdown. This must be an Eloquent Model instance.
+    | Path to the application User model. This will be used to retrieve the
+    | users displayed in the select dropdown.
+    |
+    | This must be an Eloquent Model instance.
     |
     */
-    'user_model'  => App\Models\User::class,
+    'model'   => config('auth.providers.users.model'),
 
-    'fields'     => [
+    /*
+    |--------------------------------------------------------------------------
+    | Show Trashed Users
+    |--------------------------------------------------------------------------
+    |
+    | If you are using the SoftDeletes trait on your User model, you can
+    | set this to true to show trashed users in the select dropdown.
+    |
+    */
+    'trashed' => false,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Authentication Guards
+    |--------------------------------------------------------------------------
+    |
+    | Next, you may define every authentication guard for your application.
+    | Of course, a great default configuration has been defined for you
+    | here which uses session storage and the Eloquent user provider.
+    |
+    | All authentication drivers have a user provider. This defines how the
+    | users are actually retrieved out of your database or other storage
+    | mechanisms used by this application to persist your user's data.
+    |
+    */
+    'guard'   => config('auth.defaults.guard'),
+
+    'interface' => [
+        /*
+        |--------------------------------------------------------------------------
+        | Interface Width
+        |--------------------------------------------------------------------------
+        |
+        | You are free to determine the required interface width.
+        | This is very useful for avoiding hard wraps on the interface.
+        |
+        */
+        'width' => env('IMPERSONATE_WIDTH', '21rem'),
 
         /*
         |--------------------------------------------------------------------------
-        | Field Primary ID
+        | Rate-limiting Requests
         |--------------------------------------------------------------------------
         |
-        | Primary field from the user table, for example like `id`, `user_id`, etc.
+        | You can tell LaraPersonate to wait until the user has finished typing
+        | their search term before triggering the AJAX request.
+        |
+        | Simply use the delay configuration option to tell how long
+        | to wait after a user has stopped typing before sending the request
         |
         */
-        'id'   => 'id',
-
-        /*
-        |--------------------------------------------------------------------------
-        | Field Name
-        |--------------------------------------------------------------------------
-        |
-        | Data fields for user names from table to display in the list,
-        | for example such as `name`, `user_name`, `full_name`, etc.
-        |
-        */
-        'name' => 'name',
+        'delay' => env('IMPERSONATE_DELAY', 300),
     ],
-
-    /*
-    |--------------------------------------------------------------------------
-    | With Roles
-    |--------------------------------------------------------------------------
-    |
-    | If with_roles is enabled, the displayed users will be grouped by role.
-    |
-    | You just need to set it to true, the group will show automatically
-    | if your user_model has used trait from role authorization packages such as Laratrust,
-    | otherwise groups will not be displayed even if with_roles is set to true.
-    |
-    | Currently supported:
-    | - laratrust (https://github.com/santigarcor/laratrust)
-    |
-    | Next Plan:
-    | - laravel bouncer (https://github.com/JosephSilber/bouncer)
-    | - laravel permission (https://github.com/spatie/laravel-permission)
-    |
-    */
-    'with_roles' => true,
-
-    /*
-    |--------------------------------------------------------------------------
-    | Maximum User Shown
-    |--------------------------------------------------------------------------
-    |
-    | The maximum number of users displayed
-    | when active_role is set to true, the number of displayed users will be multiplied
-    | by the number of displayed roles.
-    |
-    | Be careful, this might make your application crash if there is a lot of user data.
-    |
-    */
-    'limit'      => 5,
 ];

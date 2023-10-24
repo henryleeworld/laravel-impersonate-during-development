@@ -1,6 +1,6 @@
-# Laravel 8 開發期間切換使用者
+# Laravel 10 開發期間切換使用者
 
-引入 supianidz 的 laravel-impersonate 套件來擴增允許在開發期間開發者直接以其他使用者身份登入。
+引入 octopyid 的 laravel-impersonate 套件來擴增允許在開發期間開發者直接以其他使用者身份登入。
 
 ## 使用方式
 - 把整個專案複製一份到你的電腦裡，這裡指的「內容」不是只有檔案，而是指所有整個專案的歷史紀錄、分支、標籤等內容都會複製一份下來。
@@ -20,9 +20,13 @@ $ php artisan key:generate
 ```sh
 $ php artisan migrate --seed
 ```
-- 執行安裝 Laravel Mix 引用的依賴項目，並執行所有 Mix 任務。
+- 執行安裝 Vite 和 Laravel 擴充套件引用的依賴項目。
 ```sh
-$ npm install && npm run dev
+$ npm install
+```
+- 執行正式環境版本化資源管道並編譯。
+```sh
+$ npm run build
 ```
 - 在瀏覽器中輸入已定義的路由 URL 來訪問，例如：http://127.0.0.1:8000。
 - 你可以經由 `/register` 來進行註冊。
@@ -32,5 +36,5 @@ $ npm install && npm run dev
 ----
 
 ## 畫面截圖
-![](https://i.imgur.com/DS9hoki.png)
+![](https://i.imgur.com/aZCkwUR.gif)
 > 使用者便可以快速切換為其他使用者帳戶，而不需要關閉正在執行的程式
