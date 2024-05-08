@@ -1,4 +1,4 @@
-# Laravel 10 開發期間切換使用者
+# Laravel 11 開發期間切換使用者
 
 引入 octopyid 的 laravel-impersonate 套件來擴增允許在開發期間開發者直接以其他使用者身份登入。
 
@@ -36,5 +36,5 @@ $ npm run build
 ----
 
 ## 畫面截圖
-![](https://i.imgur.com/aZCkwUR.gif)
+![](https://i.imgur.com/O2uANEp.gif)
 > 使用者便可以快速切換為其他使用者帳戶，而不需要關閉正在執行的程式
